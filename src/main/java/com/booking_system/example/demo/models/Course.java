@@ -1,15 +1,36 @@
 package com.booking_system.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+@Entity
+@Table(name = "courses")
 
 public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "date")
     private String date;
+
+    @Column(name = "town")
     private String town;
+
+    @Column(name = "starRating")
     private int starRating;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"course"})
     private List<Booking> bookings;
 
-    public Course(String date, String town, int starRating) {
+    public Course(String name, String date, String town, int starRating) {
+        this.name = name;
         this.date = date;
         this.town = town;
         this.starRating = starRating;
@@ -17,6 +38,14 @@ public class Course {
     }
 
     public Course() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDate() {

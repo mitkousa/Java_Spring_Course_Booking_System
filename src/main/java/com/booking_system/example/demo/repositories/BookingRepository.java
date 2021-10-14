@@ -1,4 +1,7 @@
 package com.booking_system.example.demo.repositories;
 
-public interface BookingRepository {
+import com.booking_system.example.demo.models.Booking;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookingRepository extends JpaRepository<Booking, Long> {
 }
